@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'authentication.apps.AuthenticationConfig',
-    'smack.apps.SmackConfig'
+    'smack.apps.SmackConfig',
 
-    # third party apps
+    #third party apps
     'rest_framework',
 ]
 
