@@ -42,9 +42,12 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'smack.apps.SmackConfig',
 
-    #third party apps
+    # third party apps
     'rest_framework',
+    'phonenumber_field'
 ]
+
+AUTH_USER_MODEL = 'authentication.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
