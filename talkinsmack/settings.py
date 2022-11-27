@@ -41,6 +41,9 @@ INSTALLED_APPS = [
 
     'authentication.apps.AuthenticationConfig',
     'smack.apps.SmackConfig'
+
+    # third party apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
