@@ -41,7 +41,7 @@ class User(AbstractUser):
     email = models.EmailField(max_length=80, unique=True)
     phone_number = PhoneNumberField(null=False, unique=True)
     avatar = models.CharField(max_length=500)
-    creation_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD:'username'
