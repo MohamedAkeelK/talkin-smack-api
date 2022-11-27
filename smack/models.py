@@ -7,8 +7,7 @@ User = get_user_model()
 
 
 class Smack(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE),
-    # likes = ArrayField(models.ForeignKey(User, on_delete=models.CASCADE)),
+    author = models.ForeignKey(User, on_delete=models.CASCADE,blank=True, null=True)
     title = models.CharField(max_length=30)
     text = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
