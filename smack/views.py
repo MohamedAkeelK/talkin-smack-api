@@ -3,7 +3,7 @@ from .models import Smack
 from rest_framework import generics, status
 from . import serializers
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 
@@ -13,7 +13,7 @@ User = get_user_model()
 class SmackView(generics.GenericAPIView):
 
     serializer_class = serializers.SmackSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request):
 
@@ -37,7 +37,7 @@ class SmackView(generics.GenericAPIView):
 class SmackIdView(generics.GenericAPIView):
 
     serializer_class = serializers.SmackSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, smack_id):
         smack = get_object_or_404(Smack, pk=smack_id)
@@ -80,7 +80,7 @@ class UpdateSmackStatusView(generics.GenericAPIView):
 class UserSmackView(generics.GenericAPIView):
 
     serializer_class = serializers.SmackSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, user_id):
 
@@ -90,10 +90,10 @@ class UserSmackView(generics.GenericAPIView):
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-
+# todo : this is not working 
 class UserSmackDetailView(generics.GenericAPIView):
     serializer_class = serializers.SmackSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, user_id, smack_id):
         user = User.objects.get(pk=user_id)
