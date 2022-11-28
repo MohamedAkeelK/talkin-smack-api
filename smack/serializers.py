@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
 
-class SmackCreationSerialization(serializers.ModelSerializer):
+class SmackSerializer(serializers.ModelSerializer):
     author = CurrentUserDefault()
     title = serializers.CharField(max_length=30)
     text = serializers.CharField(max_length=300)
@@ -15,7 +15,7 @@ class SmackCreationSerialization(serializers.ModelSerializer):
         fields = ['author', 'title', 'text', 'created_at', 'updated_at']
 
 
-class SmackDetailSerialization(serializers.ModelSerializer):
+class SmackStatusUpdateSerializer(serializers.ModelSerializer):
     author = CurrentUserDefault()
     title = serializers.CharField(max_length=30)
     text = serializers.CharField(max_length=300)
