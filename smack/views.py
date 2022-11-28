@@ -65,6 +65,7 @@ class SmackIdView(generics.GenericAPIView):
 class UpdateSmackStatusView(generics.GenericAPIView):
 
     serializer_class = serializers.SmackStatusUpdateSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def put(self, request, smack_id):
         smack = get_object_or_404(Smack, pk=smack_id)

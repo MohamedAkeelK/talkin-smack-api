@@ -9,7 +9,7 @@ class UserCreationSerialization(serializers.ModelSerializer):
     username = serializers.CharField(max_length=25)
     email = serializers.EmailField(max_length=80)
     phone_number = PhoneNumberField(allow_null=False, allow_blank=False)
-    password = serializers.CharField(min_length=8)
+    password = serializers.CharField(min_length=8, write_only=True)
     avatar = serializers.CharField(max_length=500)
     created_at = serializers.DateTimeField()
     updated_at = serializers.DateTimeField()
@@ -40,3 +40,17 @@ class UserCreationSerialization(serializers.ModelSerializer):
                 detail="User with phone number exists")
 
         return super().validate(attrs)
+
+    def create(self, validated_data):
+        user = User.objects.create(
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            username=validated_data['username'],
+            email=validated_data['email'],
+            phone_number=validated_data['phone_number'],
+            avatar=validated_data['avatar']
+        )
+
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
