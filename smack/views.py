@@ -91,7 +91,9 @@ class UserSmackView(generics.GenericAPIView):
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-# todo : this is not working 
+# todo : this is not working
+
+
 class UserSmackDetailView(generics.GenericAPIView):
     serializer_class = serializers.SmackSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
