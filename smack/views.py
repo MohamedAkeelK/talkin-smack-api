@@ -38,6 +38,9 @@ class SmackCreateListView(generics.GenericAPIView):
 
 
 class SmackDetailView(generics.GenericAPIView):
+    
+    serializer_class=serializers.SmackDetailSerialization
+
     def get(self, request, smack_id):
         
         smack = get_object_or_404(Smack, pk=smack_id)
@@ -47,7 +50,17 @@ class SmackDetailView(generics.GenericAPIView):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, smack_id):
-        pass
+        data=request.data
+
+        serializer = self.serializer_class(data=data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response(data=serializer.data, status = status.HTTP_200_OK)
+        
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
 
     def delete(self, request, smack_id):
         pass
