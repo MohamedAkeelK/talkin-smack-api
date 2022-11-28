@@ -1,14 +1,28 @@
 from .models import Smack, Comment
 from rest_framework import serializers
+from rest_framework.fields import CurrentUserDefault
 
 
 class SmackCreationSerialization(serializers.ModelSerializer):
+    author = CurrentUserDefault()
     title = serializers.CharField(max_length=30)
     text = serializers.CharField(max_length=300)
+    created_at = serializers.DateTimeField()
+    updated_at = serializers.DateTimeField()
 
     class Meta:
         model = Smack
-        fields = ['title', 'text']
+        fields = ['author', 'title', 'text', 'created_at', 'updated_at']
+
+
+class SmackDetailSerialization(serializers.ModelSerializer):
+    title = serializers.CharField(max_length=30)
+    text = serializers.CharField(max_length=300)
+    created_at = serializers.DateTimeField()
+    updated_at = serializers.DateTimeField()
+
+    class Meta:
+        fields = ['title', 'text', 'created_at', 'updated_at']
 
 
 class CommentCreationSerialization(serializers.ModelSerializer):

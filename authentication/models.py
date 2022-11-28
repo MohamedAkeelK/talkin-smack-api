@@ -45,7 +45,7 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    USERNAME_FIELD: 'username'
+    USERNAME_FIELD: 'email'
 
     REQUIRED_FIELDS = ['email', 'phone_number']
 
