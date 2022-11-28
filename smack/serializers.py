@@ -2,6 +2,10 @@ from .models import Smack, Comment
 from rest_framework import serializers
 from rest_framework.fields import CurrentUserDefault
 
+class CommentSerializer(serializers.ModelSerializer):
+  class Meta:
+    model=Comment
+    fields='__all__'
 
 class SmackSerializer(serializers.ModelSerializer):
     author = CurrentUserDefault()

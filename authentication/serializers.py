@@ -54,3 +54,28 @@ class UserCreationSerialization(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+    def update(self, validated_data, user_id):
+        user = User.objects.get(pk='pk')
+        user.first_name = validated_data['first_name']
+        user.last_name = validated_data['last_name']
+        user.username = validated_data['username']
+        user.email = validated_data['email']
+        user.phone_number = validated_data['phone_number']
+        user.avatar = validated_data['avatar']
+        user.set_password = validated_data['password']
+
+        user.save()
+
+        # user =  User.objects.create(
+        #     first_name=validated_data['first_name'],
+        #     last_name=validated_data['last_name'],
+        #     username=validated_data['username'],
+        #     email=validated_data['email'],
+        #     phone_number=validated_data['phone_number'],
+        #     avatar=validated_data['avatar']
+        # )
+
+        # user.set_password(validated_data['password'])
+        # user.save()
+        return user

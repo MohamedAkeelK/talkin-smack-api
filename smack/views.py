@@ -1,13 +1,23 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Smack
-from rest_framework import generics, status
+from .models import Smack, Comment
+from rest_framework import generics, status, viewsets
 from . import serializers
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 
+from .serializers import CommentSerializer
+
 User = get_user_model()
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
 
 class SmackView(generics.GenericAPIView):
